@@ -2,6 +2,9 @@
 
 --------------------
 
-The start to a browser game that will have text scrolling through space.
-The goal is to type the text before it reaches the edge of the screen.
-If you complete a word you get points, if a word makes it to the end you lose.
+3/6/24
+- Started the project over using a different technique.
+- Got the background working to how I want it.
+- Update on background graphics:
+
+<img src="https://github.com/EthanGilles/Text-Scroller/blob/2df19b8b669c08ac50a000e1f1f79ce17c07164f/screenshots/Background.gif">
