@@ -4,13 +4,9 @@
 }
 
 /* Reset some default margin and padding for consistency */
-body, h1, p {
+body {
     margin: 0;
     padding: 0;
-}
-
-
-body {
     font-family: "Kode Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 400; /*between 400-700 */
@@ -21,10 +17,6 @@ body {
 }
 
 canvas {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    height: 100vh;
-    width: 100vw;
+    
 }
 
