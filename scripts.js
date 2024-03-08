@@ -1,15 +1,29 @@
+//CANVAS VARIABLES
 var canvas = document.getElementById('background-canvas');
 var ctx = canvas.getContext('2d');
 
+//ENEMY VARIABLES
 const enemyColor = "#FF4242";
+const maxEnemies = 4;
+const enemies = [];
+const words = ["hello", "airplane", "mobile", "maybe", "nevermind", "snack", "several", "train", "goggles"];
+
+//EXPLOSION VARIABLES
 const exploSize = 100; //number of particles in an explosion
+const exploColors = ["#FA8787", "#C95151", "#C43737", "#F72020", "#FF4242"];
+//Color options of different hues of reds for the explosion particles.
+
+//STAR VARIABLES
 const totalStars = 400; //Total number of stars on the screen
 const speed = 4; //Max speed of stars on the screen
 const size = 2.5; //Max size of stars on the screen
 const colors = ["#FFFFF0", "#DEFBFF", "#FFEFC4", "#FCE4BD", "#F6F7E6", "#FA8787", "#FFDB78", "#7FB0DB", "#668ED4"]; //Color options for stars on the screen
 //Color options are all muted White, Blues, Yellows and Reds.
-const exploColors = ["#FA8787", "#C95151", "#C43737", "#F72020", "#FF4242"];
-//Color options of different reds for the explosion particles.
+
+
+
+
+
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
@@ -127,7 +141,7 @@ class Explosion {
     }
     isDead() {
         return this.position.x < 0 || this.position.x > window.innerWidth || 
-        this.position.y < 0 || this.position.y > window.innerWidth;
+        this.position.y < 0 || this.position.y > window.innerHeight;
     }
 
 }
@@ -137,14 +151,14 @@ class Word {
         this.init();
     }
     init() {
-        this.untyped = "hello";
+        this.untyped = words[randomInt(0,words.length)];
         this.typed = new String();
         this.explosions = [];
         this.isTyped = false;
 
         this.position = {
             x: -(this.untyped.length * 60),
-            y: window.innerHeight / 2
+            y: randomInt(100, window.innerHeight-100)
         }
         this.velocity = {
             x: 4,
@@ -166,15 +180,22 @@ class Word {
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
+        //if the word has been typed 
+        if(this.untyped.length == 0 && !this.isTyped) { 
+            this.explosions = Array.from(Array(exploSize), () => new Explosion(this.position.x, this.typed.length));
+            this.isTyped = true;
+            if(enemies.length <= maxEnemies) 
+                enemies.push(new Word());
+        }
+
         if(this.untyped.charAt(0) == lastKey) {
             this.typed += lastKey;
             this.untyped = this.untyped.substr(1);
             lastKey = null;
         }
-
-        if(this.untyped.length == 0 && !this.isTyped) { //if the word has been typed
-            this.explosions = Array.from(Array(exploSize), () => new Explosion(this.position.x, this.typed.length));
-            this.isTyped = true;
+        
+        if(this.isDead()) {
+            this.init();
         }
 
         if(!this.isTyped) {
@@ -182,10 +203,6 @@ class Word {
         }
         else {
             this.explosions.forEach(explo => explo.update());
-        }
-
-        if(this.isDead()) {
-            this.init();
         }
     }
     isDead() {
@@ -197,25 +214,29 @@ class Word {
     }
 }
 
-function drawWord(word) {
-    ctx.font = "100px Kode Mono";
-    ctx.fillStyle = 'white';
-    ctx.fillText(word, 0, 300);
-}
-
+//initialize variables for the animation
 let lastKey = null;
 let stars = Array.from(Array(totalStars), () => new Star());
-let enemy = new Word();
+enemies.push(new Word());
 
+//ANIMATION FUNCTION
 function animate() {
+    //Clear screen
     ctx.fillStyle = "#05061F";
     ctx.globalAlpha = 0.75;
     ctx.fillRect(0,0,canvas.width,canvas.height);
+    
+    //update stars
     stars.forEach(star => star.update());
-    enemy.update();
+
+    //update word enemies
+    enemies.forEach(e => e.update());
+
+    //animate
     requestAnimationFrame(animate);
 }
 
+//added to event listener to widen the canvas realtime.
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
