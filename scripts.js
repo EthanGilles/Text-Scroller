@@ -91,8 +91,8 @@ class Explosion {
             y: window.innerHeight / 2 -40
         }
         this.velocity = {
-            x: (Math.random() * (speed+speed)) +1,
-            y: (Math.random() * (speed+speed)) +1
+            x: (Math.random() * (speed+speed)) +0.8,
+            y: (Math.random() * (speed+speed)) +0.8
         }
 
         if(Math.random() < 0.5) {
