@@ -1,13 +1,14 @@
 # Text Scroller
-
 --------------------
 
 ## TO DO
 
-- Make words randomized from a long list of words (currently they are being read in from a small array of like 5 words).
-- Make words come at the user faster, with more than one word at a time
-- Implement losing, and a reset button for when a word reaches the end of the screen
-- Implement score system
+[x] Make words randomized from a long list of words (currently they are being read in from a small array of like 5 words). 
+[x] Make words come at the user faster, with more than one word at a time 
+[] Implement losing, and a reset button for when a word reaches the end of the screen
+[] Implement score system
+[] Implement title screen (In progress)
+[] Implement user system to keep track of user scores
 
 --------------------
 
@@ -35,5 +36,14 @@
 - This is a temporary change to test gamplay which is decently fun.
 
 
-BIG NOTE:
-The typing with more than one word is clunky at the moment. It depends on where the word is in the array which can be funky. This could be solved by making sure the words are in the same order on the screen as they are in the array. Then, the words will update in order they are typed so the word in front gets registered first. Currently it seems kinda random if more than one word has the same letter to type. This should be fixed for the front word if the words appear in the same order they are in the array.
+### 04/30/24
+
+I've come back to this project now that I have my own home server, using Ubuntu Server LTS and
+running apache2. This means I have access to it on my own network at home. My network will load the 'main'
+branch from here on GitHub so I will be using branches to make modifications.
+Once this is done, I am going to try and connect this apache server to the internet.
+
+What I got done today, on this actual project was:
+- Added a system for loading words from a text file.
+- Put this on a server on my home network for testing.
+- Started (super barebones) the title page of the game.
