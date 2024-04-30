@@ -6,7 +6,7 @@ var ctx = canvas.getContext('2d');
 const enemyColor = "#FF4242";
 const maxEnemies = 4;
 const enemies = [];
-const words = ["hello", "airplane", "mobile", "maybe", "nevermind", "snack", "several", "train", "goggles"];
+var words = ["hello", "airplane", "mobile", "maybe", "nevermind", "snack", "several", "train", "goggles"];
 
 //EXPLOSION VARIABLES
 const exploSize = 100; //number of particles in an explosion
@@ -19,11 +19,6 @@ const speed = 4; //Max speed of stars on the screen
 const size = 2.5; //Max size of stars on the screen
 const colors = ["#FFFFF0", "#DEFBFF", "#FFEFC4", "#FCE4BD", "#F6F7E6", "#FA8787", "#FFDB78", "#7FB0DB", "#668ED4"]; //Color options for stars on the screen
 //Color options are all muted White, Blues, Yellows and Reds.
-
-
-
-
-
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
@@ -191,7 +186,6 @@ class Word {
         if(this.untyped.charAt(0) == lastKey) {
             this.typed += lastKey;
             this.untyped = this.untyped.substr(1);
-            lastKey = null;
         }
         
         if(this.isDead()) {
@@ -204,6 +198,8 @@ class Word {
         else {
             this.explosions.forEach(explo => explo.update());
         }
+
+        
     }
     isDead() {
         let allGone = true;
@@ -214,13 +210,17 @@ class Word {
     }
 }
 
-//initialize variables for the animation
-let lastKey = null;
-let stars = Array.from(Array(totalStars), () => new Star());
-enemies.push(new Word());
+function initWords(filepath) {
+  fetch(filepath)
+  .then(response => response.text())
+  .then(text => {
+      let array = text.split("\n");
+      words = words.concat(array);
+      console.log("Words loaded from " + filepath);
+    })
+}
 
-//ANIMATION FUNCTION
-function animate() {
+function gameplayLoop() {
     //Clear screen
     ctx.fillStyle = "#05061F";
     ctx.globalAlpha = 0.75;
@@ -231,9 +231,25 @@ function animate() {
 
     //update word enemies
     enemies.forEach(e => e.update());
+    //after all of the words update, reset the lastKey
+    lastKey = null;
 
     //animate
     requestAnimationFrame(animate);
+}
+
+//initialize variables for the animation
+let lastKey = null;
+let stars = Array.from(Array(totalStars), () => new Star());
+
+initWords('five_letter.txt');
+
+enemies.push(new Word());
+
+//ANIMATION FUNCTION
+function animate() {
+
+  gameplayLoop();
 }
 
 //added to event listener to widen the canvas realtime.
@@ -246,6 +262,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 window.addEventListener('resize', resizeCanvas, false);
 document.addEventListener("keydown", (ev) => { lastKey = ev.key; });
+
 animate();
 // (CenterX, CenterY, Radius, Start angle, End angle)
 
