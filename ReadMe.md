@@ -1,16 +1,22 @@
 # Text Scroller
 --------------------
 
-## TO DO
+## TO DO (Overall)
 
-[x] Make words randomized from a long list of words (currently they are being read in from a small array of like 5 words). 
-[x] Make words come at the user faster, with more than one word at a time 
-[] Implement losing, and a reset button for when a word reaches the end of the screen
-[] Implement score system
-[] Implement title screen (In progress)
-[] Implement user system to keep track of user scores
+[x] Make words randomized from a long list of words (currently they are being read in from a small array of like 5 words). </br>
+[x] Make words come at the user faster, with more than one word at a time </br>
+[] Implement losing, and a reset button for when a word reaches the end of the screen </br>
+[] Implement score system </br>
+[] Implement title screen (In progress) </br>
+[] Implement user system to keep track of user scores </br>
 
 --------------------
+
+## TO DO (This branch)
+
+[] Make a title screen </br>
+[] Make a highscore screen </br>
+[] Make a end-game screen </br>
 
 ## LOG
 

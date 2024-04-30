@@ -4,12 +4,12 @@ var ctx = canvas.getContext('2d');
 
 //ENEMY VARIABLES
 const enemyColor = "#FF4242";
-const maxEnemies = 4;
+const maxEnemies = 6;
 const enemies = [];
-var words = ["hello", "airplane", "mobile", "maybe", "nevermind", "snack", "several", "train", "goggles"];
+var words = ["crabs", "airplane", "mobile", "maybe", "nevermind", "snack", "several", "train", "goggles"];
 
 //EXPLOSION VARIABLES
-const exploSize = 100; //number of particles in an explosion
+const exploSize = 75; //number of particles in an explosion
 const exploColors = ["#FA8787", "#C95151", "#C43737", "#F72020", "#FF4242"];
 //Color options of different hues of reds for the explosion particles.
 
@@ -198,8 +198,6 @@ class Word {
         else {
             this.explosions.forEach(explo => explo.update());
         }
-
-        
     }
     isDead() {
         let allGone = true;
@@ -248,7 +246,6 @@ enemies.push(new Word());
 
 //ANIMATION FUNCTION
 function animate() {
-
   gameplayLoop();
 }
 
@@ -264,7 +261,3 @@ window.addEventListener('resize', resizeCanvas, false);
 document.addEventListener("keydown", (ev) => { lastKey = ev.key; });
 
 animate();
-// (CenterX, CenterY, Radius, Start angle, End angle)
-
-
- 
