@@ -76,6 +76,12 @@ class Star {
     }
 }
 
+function playButton() {
+  ctx.fillStyle = '#FA8787';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+}
+
 function animate() {
   //Clear screen
   ctx.fillStyle = "#05061F";
@@ -84,6 +90,8 @@ function animate() {
 
   //update stars
   stars.forEach(star => star.update());
+
+  playButton();
 
   requestAnimationFrame(animate);
 }

@@ -130,7 +130,6 @@ asked
 askew
 aspen
 assay
-asses
 asset
 aster
 astir
@@ -1119,7 +1118,6 @@ gamin
 gamma
 gamut
 gangs
-gaped
 gapes
 gases
 gasps
@@ -1131,8 +1129,6 @@ gauze
 gauzy
 gavel
 gawky
-gayer
-gayly
 gazed
 gazer
 gazes
