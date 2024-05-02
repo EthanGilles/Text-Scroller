@@ -1,6 +1,26 @@
 //CANVAS VARIABLES
 var canvas = document.getElementById('background-canvas');
 var ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+//Button variables
+var playBox = {
+  xOffset: 140,
+  x: canvas.width/2 - this.xOffset,
+  y: canvas.height/2 - 150,
+  w: 285,
+  h: 70,
+};
+var highscoreBox = {
+  xOffset: 170,
+  x: canvas.width/2 - this.xOffset,
+  y: canvas.height/2 - 50,
+  w: 345,
+  h: 100,
+};
+resizeBox(playBox);
+resizeBox(highscoreBox);
 
 //STAR VARIABLES
 const totalStars = 400; //Total number of stars on the screen
@@ -76,12 +96,6 @@ class Star {
     }
 }
 
-var playBox = {
-  x: window.innerWidth/2 - 140,
-  y: window.innerHeight/2 - 150,
-  w: 285,
-  h: 70,
-}
 
 function playButton() {
   ctx.globalAlpha = 1;
@@ -110,13 +124,6 @@ function playButton() {
     canvas.height/2 - 100);
 
 }
-
-var highscoreBox = {
-  x: window.innerWidth/2 - 170,
-  y: window.innerHeight/2 - 50,
-  w: 345,
-  h: 100,
-};
 
 function highscoreButton() {
   ctx.globalAlpha = 1;
@@ -213,16 +220,22 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
+function resizeBox(box) {
+  box.x = canvas.width/2 - box.xOffset; 
+}
+
 //added to event listener to widen the canvas realtime.
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  
+  //reset button hitboxes
+  resizeBox(playBox);
+  resizeBox(highscoreBox);
 }
 
 //MAIN
 let stars = Array.from(Array(totalStars), () => new Star());
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 window.addEventListener('resize', resizeCanvas, false);
 
 animate();
