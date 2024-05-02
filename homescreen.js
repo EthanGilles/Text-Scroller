@@ -193,7 +193,7 @@ canvas.addEventListener('click', function(e) {
   }
 
   if(isInside(pos, playBox)) {
-  alert('clicked play button');
+    location.href = "game.html";
   }
 
 }, false);
