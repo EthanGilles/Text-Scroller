@@ -76,6 +76,13 @@ class Star {
     }
 }
 
+var playBox = {
+  x: window.innerWidth/2 - 140,
+  y: window.innerHeight/2 - 150,
+  w: 285,
+  h: 70,
+}
+
 function playButton() {
   ctx.globalAlpha = 1;
   //Make the background of the button
@@ -103,6 +110,13 @@ function playButton() {
     canvas.height/2 - 100);
 
 }
+
+var highscoreBox = {
+  x: window.innerWidth/2 - 170,
+  y: window.innerHeight/2 - 50,
+  w: 345,
+  h: 100,
+};
 
 function highscoreButton() {
   ctx.globalAlpha = 1;
@@ -139,25 +153,46 @@ function title() {
 
   ctx.font = 'bold 12px Courier New';
   
-  ctx.fillText(" ______  ______  __  __  ______     ______  ______  ______  ______  ______",
-  canvas.width/2 - 260,
+  ctx.fillText("▄▄▄▄▄▄▄▄ .▐▄• ▄ ▄▄▄▄▄    ▄▄▄   ▄▄▄·  ▄▄· ▄▄▄ .▄▄▄",
+  canvas.width/2 - 160,
   canvas.height/15);
 
-  ctx.fillText("/\\__  _\\/\\  ___\\/\\_\\_\\_\\/\\__  _\\   /\\  == \\/\\  __ \\/\\  ___\\/\\  ___\\/\\  == \\",
-  canvas.width/2 - 260,
+  ctx.fillText("•██  ▀▄.▀· █▌█▌▪•██      ▀▄ █·▐█ ▀█ ▐█ ▌▪▀▄.▀·▀▄ █·",
+  canvas.width/2 - 160,
   canvas.height/15+12);
 
-  ctx.fillText("\\/_/\\ \\/\\ \\  __\\\\/_/\\_\\/\\/_/\\ \\/   \\ \\  __<\\ \\  __ \\ \\ \\___\\ \\  __\\\\ \\  __<",
-  canvas.width/2 - 260,
+  ctx.fillText(" ▐█.▪▐▀▀▪▄ ·██·  ▐█.▪    ▐▀▀▄ ▄█▀▀█ ██ ▄▄▐▀▀▪▄▐▀▀▄",
+  canvas.width/2 - 160,
   canvas.height/15+24);
 
-  ctx.fillText("   \\ \\_\\ \\ \\_____\\/\\_\\/\\_\\ \\ \\_\\    \\ \\_\\ \\_\\ \\_\\ \\_\\ \\_____\\ \\_____\\ \\_\\ \\_\\",
-  canvas.width/2 - 260,
+  ctx.fillText(" ▐█▌·▐█▄▄▌▪▐█·█▌ ▐█▌·    ▐█•█▌▐█ ▪▐▌▐███▌▐█▄▄▌▐█•█▌",
+  canvas.width/2 - 160,
   canvas.height/15+36);
 
-  ctx.fillText("    \\/_/  \\/_____/\\/_/\\/_/  \\/_/     \\/_/ /_/\\/_/\\/_/\\/_____/\\/_____/\\/_/ /_/",
-  canvas.width/2 - 260,
+  ctx.fillText(" ▀▀▀  ▀▀▀ •▀▀ ▀▀ ▀▀▀     .▀  ▀ ▀  ▀ ·▀▀▀  ▀▀▀ .▀  ▀",
+  canvas.width/2 - 160,
   canvas.height/15+48);
+}
+
+canvas.addEventListener('click', function(e) {
+  var canv = canvas.getBoundingClientRect();
+  var pos = {
+    x: e.clientX - canv.left,
+    y: e.clientY - canv.top,
+  };
+
+  if(isInside(pos, highscoreBox)) {
+    alert('clicked highscore');
+  }
+
+  if(isInside(pos, playBox)) {
+  alert('clicked play button');
+  }
+
+}, false);
+
+function isInside(pos, box) {
+  return pos.x > box.x && pos.x < box.x + box.w && pos.y > box.y && pos.y < box.y + box.h
 }
 
 function animate() {
