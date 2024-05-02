@@ -19,8 +19,25 @@ var highscoreBox = {
   w: 345,
   h: 100,
 };
+var loginBox = {
+  xOffset: 105,
+  x: canvas.width/2 - 105,
+  y: canvas.height/2 + 50,
+  w: 200,
+  h: 70,
+};
+var signUpBox = {
+  xOffset: 120,
+  x: canvas.width/2 - 120,
+  y: canvas.height/2 + 150,
+  w: 225,
+  h: 70,
+};
+
 resizeBox(playBox);
 resizeBox(highscoreBox);
+resizeBox(loginBox);
+resizeBox(signUpBox);
 
 //STAR VARIABLES
 const totalStars = 400; //Total number of stars on the screen
@@ -57,8 +74,8 @@ class Star {
         this.color = colors[randomInt(0,colors.length)];
         this.size = Math.random() * size;
         this.position = {
-            x: window.innerWidth + randomInt(20,100),
-            y: randomInt(-5, window.innerHeight+5)
+            x: canvas.width + randomInt(20,100),
+            y: randomInt(-5, canvas.height+5)
         }
         this.velocity = {
             x: (Math.random() * -speed) -0.2,
@@ -161,24 +178,81 @@ function title() {
   ctx.font = 'bold 12px Courier New';
   
   ctx.fillText("▄▄▄▄▄▄▄▄ .▐▄• ▄ ▄▄▄▄▄    ▄▄▄   ▄▄▄·  ▄▄· ▄▄▄ .▄▄▄",
-  canvas.width/2 - 160,
+  canvas.width/2 - 170,
   canvas.height/15);
 
   ctx.fillText("•██  ▀▄.▀· █▌█▌▪•██      ▀▄ █·▐█ ▀█ ▐█ ▌▪▀▄.▀·▀▄ █·",
-  canvas.width/2 - 160,
+  canvas.width/2 - 170,
   canvas.height/15+12);
 
   ctx.fillText(" ▐█.▪▐▀▀▪▄ ·██·  ▐█.▪    ▐▀▀▄ ▄█▀▀█ ██ ▄▄▐▀▀▪▄▐▀▀▄",
-  canvas.width/2 - 160,
+  canvas.width/2 - 170,
   canvas.height/15+24);
 
   ctx.fillText(" ▐█▌·▐█▄▄▌▪▐█·█▌ ▐█▌·    ▐█•█▌▐█ ▪▐▌▐███▌▐█▄▄▌▐█•█▌",
-  canvas.width/2 - 160,
+  canvas.width/2 - 170,
   canvas.height/15+36);
 
   ctx.fillText(" ▀▀▀  ▀▀▀ •▀▀ ▀▀ ▀▀▀     .▀  ▀ ▀  ▀ ·▀▀▀  ▀▀▀ .▀  ▀",
-  canvas.width/2 - 160,
+  canvas.width/2 - 170,
   canvas.height/15+48);
+}
+
+function login() {
+  ctx.globalAlpha = 1;
+
+  ctx.fillStyle = '#05061F';
+  ctx.fillRect(
+    canvas.width/2 - 105,
+    canvas.height/2 + 50,
+    200,
+    70);
+
+
+  //Bouding box of the button
+  // ctx.strokeStyle = '#c94c36';
+  // ctx.lineWidth = 4;
+  // ctx.strokeRect(
+  //   canvas.width/2 - 105,
+  //   canvas.height/2 + 50,
+  //   200,
+  //   70);
+
+
+  ctx.fillStyle = '#9c94eb';
+  ctx.font = "bold italic 50px Courier New";
+  ctx.fillText("LOG IN",
+    canvas.width/2 - 100, 
+    canvas.height/2 + 100);
+}
+
+function signUp() {
+  ctx.globalAlpha = 1;
+
+  ctx.fillStyle = '#05061F';
+  ctx.fillRect(
+    canvas.width/2 - 120,
+    canvas.height/2 + 150,
+    225,
+    70);
+
+
+  //Bouding box of the button
+  // ctx.strokeStyle = '#c94c36';
+  // ctx.lineWidth = 4;
+  // ctx.strokeRect(
+  //   canvas.width/2 - 120,
+  //   canvas.height/2 + 150,
+  //   225,
+  //   70);
+
+
+  ctx.fillStyle = '#9c94eb';
+  ctx.font = "bold italic 50px Courier New";
+  ctx.fillText("SIGN UP",
+    canvas.width/2 - 115, 
+    canvas.height/2 + 200);
+
 }
 
 canvas.addEventListener('click', function(e) {
@@ -188,13 +262,24 @@ canvas.addEventListener('click', function(e) {
     y: e.clientY - canv.top,
   };
 
-  if(isInside(pos, highscoreBox)) {
+  //Functionality for clicking boxes
+  if(isInside(pos, highscoreBox)) 
     alert('clicked highscore');
-  }
 
-  if(isInside(pos, playBox)) {
+  if(isInside(pos, playBox)) 
     location.href = "game.html";
-  }
+
+  if(isInside(pos, loginBox)) 
+    alert('clicked login');
+  
+  console.log("mouse x: " + pos.x);
+  console.log("mouse.y: " + pos.y);
+  console.log("box x: " + loginBox.x);
+  console.log("box y: " + loginBox.y);
+
+  if(isInside(pos, signUpBox))
+    alert('clicked sign up');
+
 
 }, false);
 
@@ -217,11 +302,15 @@ function animate() {
 
   highscoreButton();
 
+  login();
+
+  signUp();
+
   requestAnimationFrame(animate);
 }
 
 function resizeBox(box) {
-  box.x = canvas.width/2 - box.xOffset; 
+  box.x = canvas.width/2 - box.xOffset;
 }
 
 //added to event listener to widen the canvas realtime.
@@ -232,6 +321,8 @@ function resizeCanvas() {
   //reset button hitboxes
   resizeBox(playBox);
   resizeBox(highscoreBox);
+  resizeBox(loginBox);
+  resizeBox(signUpBox)
 }
 
 //MAIN
