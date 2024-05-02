@@ -104,6 +104,34 @@ function playButton() {
 
 }
 
+function highscoreButton() {
+  ctx.globalAlpha = 1;
+  //Make the background of the button
+  ctx.fillStyle = '#05061F';
+  ctx.fillRect(
+    canvas.width/2 - 170,
+    canvas.height/2 - 50,
+    345,
+    70);
+
+  //Bouding box of the button
+  // ctx.strokeStyle = '#c94c36';
+  // ctx.lineWidth = 4;
+  // ctx.strokeRect(
+  //   canvas.width/2 - 170,
+  //   canvas.height/2 - 50,
+  //   345,
+  //   70);
+
+  //Draw the text
+  ctx.fillStyle = '#9c94eb';
+  ctx.font = "bold italic 50px Courier New";
+  ctx.fillText("HIGH SCORES",
+    canvas.width/2 - 165, 
+    canvas.height/2);
+
+}
+
 function title() {
   ctx.globalAlpha = 1;
 
@@ -142,8 +170,10 @@ function animate() {
   stars.forEach(star => star.update());
 
   playButton();
-
+  
   title();
+
+  highscoreButton();
 
   requestAnimationFrame(animate);
 }
