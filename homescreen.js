@@ -78,36 +78,61 @@ class Star {
 
 function playButton() {
   ctx.globalAlpha = 1;
-  
   //Make the background of the button
-  ctx.fillStyle = '#6da5ed';
+  ctx.fillStyle = '#05061F';
   ctx.fillRect(
-    canvas.width/2 - canvas.width/6,
-    canvas.height/2 - canvas.height/10,
-    canvas.width/3,
-    canvas.height/10);
+    canvas.width/2 - 140,
+    canvas.height/2 - 150,
+    285,
+    70);
 
-  //Make the outline around the button
-  ctx.strokeStyle = '#c94c36';
-  ctx.lineWidth = 4;
-  ctx.strokeRect(
-    canvas.width/2 - canvas.width/6,
-    canvas.height/2 - canvas.height/10,
-    canvas.width/3,
-    canvas.height/10);
+  // Bouding box of the button
+  // ctx.strokeStyle = '#c94c36';
+  // ctx.lineWidth = 4;
+  // ctx.strokeRect(
+  //   canvas.width/2 - 140,
+  //   canvas.height/2 - 150,
+  //   285,
+  //   70);
 
   //Draw the text
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = '#9c94eb';
   ctx.font = "bold italic 50px Courier New";
   ctx.fillText("PLAY GAME",
     canvas.width/2 - 135, 
-    canvas.height/2 - canvas.height/30);
+    canvas.height/2 - 100);
 
 }
 
-function animate() {
-  playButton();
+function title() {
+  ctx.globalAlpha = 1;
 
+  ctx.fillStyle = '#f00c0c';
+
+  ctx.font = 'bold 12px Courier New';
+  
+  ctx.fillText(" ______  ______  __  __  ______     ______  ______  ______  ______  ______",
+  canvas.width/2 - 260,
+  canvas.height/15);
+
+  ctx.fillText("/\\__  _\\/\\  ___\\/\\_\\_\\_\\/\\__  _\\   /\\  == \\/\\  __ \\/\\  ___\\/\\  ___\\/\\  == \\",
+  canvas.width/2 - 260,
+  canvas.height/15+12);
+
+  ctx.fillText("\\/_/\\ \\/\\ \\  __\\\\/_/\\_\\/\\/_/\\ \\/   \\ \\  __<\\ \\  __ \\ \\ \\___\\ \\  __\\\\ \\  __<",
+  canvas.width/2 - 260,
+  canvas.height/15+24);
+
+  ctx.fillText("   \\ \\_\\ \\ \\_____\\/\\_\\/\\_\\ \\ \\_\\    \\ \\_\\ \\_\\ \\_\\ \\_\\ \\_____\\ \\_____\\ \\_\\ \\_\\",
+  canvas.width/2 - 260,
+  canvas.height/15+36);
+
+  ctx.fillText("    \\/_/  \\/_____/\\/_/\\/_/  \\/_/     \\/_/ /_/\\/_/\\/_/\\/_____/\\/_____/\\/_/ /_/",
+  canvas.width/2 - 260,
+  canvas.height/15+48);
+}
+
+function animate() {
   //Clear screen
   ctx.fillStyle = "#05061F";
   ctx.globalAlpha = 0.75;
@@ -117,6 +142,8 @@ function animate() {
   stars.forEach(star => star.update());
 
   playButton();
+
+  title();
 
   requestAnimationFrame(animate);
 }
